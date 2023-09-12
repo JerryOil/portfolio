@@ -1,10 +1,8 @@
 				 	  	/*Programma Kryptografhshs Dedomenwn*/
-						 //S = boh8hma apo k.Sagiako Gewrgio
-				//L = epekshghsh h' enallaktikoi tropoi apo lada Gerasimo
 
 #include <stdio.h>
-#include <stdlib.h> //L gia thn exit();
-#include <string.h> //L gia th strlen();
+#include <stdlib.h> // gia thn exit();
+#include <string.h> // gia th strlen();
 
 int main(int argc, char *argv[])
 {
@@ -17,39 +15,39 @@ int main(int argc, char *argv[])
         printf("\nUsage: encrypt sourceFile destinationFile key\n\n");
     } 
 	else {
-        //S des an uparxei to arxeio argv[1] kai anoije to gia anagnosi
-        fopen_s(&fp1,argv[1],"rb"); //L enallaktika fp1=fopen(argv[1],"rb");
+        // des an uparxei to arxeio argv[1] kai anoije to gia anagnosi
+        fopen_s(&fp1,argv[1],"rb"); // enallaktika fp1=fopen(argv[1],"rb");
         if (!fp1){
         	printf("file doesn't exist");
         	exit(0);
         }
         
-        //S dimiourgise to arxeio argv[2] kai anoije to gia eggrafi
-        fopen_s(&fp2,argv[2],"wb"); //L enallaktika fp2=fopen(argv[2],"wb");
+        // dimiourgise to arxeio argv[2] kai anoije to gia eggrafi
+        fopen_s(&fp2,argv[2],"wb"); // enallaktika fp2=fopen(argv[2],"wb");
         
         lengthOfKey=strlen(argv[3]);
-        //printf("to mhkos toy kleidioy einai: %d",lengthOfKey); //L elegxos mhkous kleidioy
+        // printf("to mhkos toy kleidioy einai: %d",lengthOfKey); // elegxos mhkous kleidioy
         
         i=0;
-        //L diavazw edw to 1-o xarakthra gia na vgei teleio, alliws pros8etei 1 extra byte sto telos toy 2-ou arxeiou(amelhteo, apla oxi teleio)
-        fread(&ch,sizeof(char),1,fp1);//L enallaktika ch=fgetc(fp1); (mono gia txt arxeia)
+        // diavazw edw to 1-o xarakthra gia na vgei teleio, alliws pros8etei 1 extra byte sto telos toy 2-ou arxeiou(amelhteo, apla oxi teleio)
+        fread(&ch,sizeof(char),1,fp1);// enallaktika ch=fgetc(fp1); (mono gia txt arxeia)
         while (!feof(fp1)) {
-            //printf("Apo th 8esh %d toy 1ou arxeioy\n",ftell(fp1)); //L elegxos dromea 1ou arxeioy
-            //S ENCRYPTION
+            //printf("Apo th 8esh %d toy 1ou arxeioy\n",ftell(fp1)); // elegxos dromea 1ou arxeioy
+            // ENCRYPTION
             ch+=argv[3][i%lengthOfKey]; //(an olo to programma ginei copy-paste kai se ayth thn entolh antikatasthsoyme to (+)8etiko proshmo me (-)arnhtiko exoyme thn apokryptografhsh)
-            //printf("o cryptografhmenos xarakthras %c\n",ch); //L elegxos cryptoxarakthra
-            //S Grapse enan xaraktira sto argv[2];
+            // printf("o cryptografhmenos xarakthras %c\n",ch); // elegxos cryptoxarakthra
+            // Grapse enan xaraktira sto argv[2];
             fwrite(&ch,sizeof(char),1,fp2);//L enallaktika fputc(ch,fp2); (mono gia txt arxeia)
-            //printf("   sth 8esh %d tou 2ou arxeioy\n",ftell(fp2)); //L elegxos dromea 2ou arxeioy
-            //L diavasma xarakthra apo 1-o arxeio edw, alliws pros8etei 1 extra byte sto telos tou 2-ou arxeiou(amelhteo, apla oxi teleio)
-            fread(&ch,sizeof(char),1,fp1);//L enallaktika ch=fgetc(fp1); (mono gia txt arxeia)
+            // printf("   sth 8esh %d tou 2ou arxeioy\n",ftell(fp2)); // elegxos dromea 2ou arxeioy
+            // diavasma xarakthra apo 1-o arxeio edw, alliws pros8etei 1 extra byte sto telos tou 2-ou arxeiou(amelhteo, apla oxi teleio)
+            fread(&ch,sizeof(char),1,fp1);// enallaktika ch=fgetc(fp1); (mono gia txt arxeia)
 			i++;
 			//printf("PARAKALW PERIMENETE\nExoun kryptografh8ei kai metafer8ei %dbytes\n",i); //L Wraiopoihmeno mhnuma pros xrhsth (to afairoyme an 8eloyme megalyterh taxythta)
         }
-        //S REMEMBER TO CLOSE THE FILES
+        // REMEMBER TO CLOSE THE FILES
         fclose(fp1);
         fclose(fp2);
-        printf("\nH Kryptografhsh OLOKLHRW8HKE\n"); //L mhnyma telous
+        printf("\nH Kryptografhsh OLOKLHRW8HKE\n"); // mhnyma telous
     }
     return 0;
 }
